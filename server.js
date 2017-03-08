@@ -1,8 +1,5 @@
 let restify = require('restify');
 
-// in-memory storage
-let tempDataSet = {};
-
 let auth = (req, res, next) => {
 	console.log('auth happens here');
 	return next();
@@ -16,6 +13,7 @@ let logRequest = (req, res, next) => {
 let server = restify.createServer({
 	name: 'restifyExampleTodoApi'
 });
+server.use(restify.bodyParser());
 server.use(auth);
 server.use(logRequest);
 
@@ -27,15 +25,17 @@ let mockResponse = (req, res, next) => {
 	return next();
 }
 
+let todoListController = require('./app/controllers/todo.list.controller');
+
 /************************************************
  * todo list endpoints
  ************************************************/
 
 // create todo list
-server.post('/todolists', mockResponse);
+server.post('/todolists', todoListController.addNewTodoList);
 
 // update todo list
-server.put('/todolists/:todoListId', mockResponse);
+server.put('/todolists/:todoListId', todoListController.updateExistingTodoList);
 
 // list todo list
 server.get('/todolists', mockResponse);
