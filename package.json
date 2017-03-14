@@ -2,7 +2,9 @@
   "name": "restify-example-todo",
   "version": "0.0.1",
   "main": "server.js",
-  "scripts": {},
+  "scripts": {
+    "test": "node app/tests/todo.list.test.js"
+  },
   "dependencies": {
     "body-parser": "~1.0.1",
     "cors": "~2.8.0",
@@ -11,6 +13,7 @@
     "jsonwebtoken": "~7.1.9",
     "lodash": "~4.17.4",
     "moment": "~2.14.1",
+    "mongoose": "^4.9.0",
     "q": "~1.4.1",
     "randomstring": "~1.1.5",
     "restify": "~4.3.0",

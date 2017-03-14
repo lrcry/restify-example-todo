@@ -1,6 +1,8 @@
 let ObjectUtils = {
 	setObjectDefaultFields: (obj) => {
-		obj.setCreateAt(new Date());
+		obj.createAt = new Date();
+		obj.avail = true;
+		obj.version = 0;
 	}
 }
 

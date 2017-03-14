@@ -1,4 +1,17 @@
+/**
+ * server.js
+ *
+ * server as a module
+ */
+
 let restify = require('restify');
+let mongoose = require('mongoose');
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Db conn error: '));
+db.once('open', function() {
+	console.log('connection established');
+});
+mongoose.connect('mongodb://localhost:27017/todolistdb');
 
 let auth = (req, res, next) => {
 	console.log('auth happens here');
@@ -38,13 +51,13 @@ server.post('/todolists', todoListController.addNewTodoList);
 server.put('/todolists/:todoListId', todoListController.updateExistingTodoList);
 
 // list todo list
-server.get('/todolists', mockResponse);
+server.get('/todolists', todoListController.getTodoListsList);
 
 // get single todo list
-server.get('/todolists/:todoListId', mockResponse);
+server.get('/todolists/:todoListId', todoListController.getSingleTodoList);
 
 // remove todo list
-server.del('/todolists/:todoListId', mockResponse);
+server.del('/todolists/:todoListId', todoListController.removeExistingTodoList);
 
 // create todo list item
 server.post('/todolists/:todoListId/items', mockResponse);
@@ -61,4 +74,5 @@ server.get('/todolists/:todoListId/items/:itemId', mockResponse);
 // remove todo list item
 server.del('/todolists/:todoListId/items/:itemId', mockResponse);
 
-server.listen(10240);
+module.exports = server;
+

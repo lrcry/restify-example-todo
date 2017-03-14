@@ -1,8 +1,8 @@
 TodoListUtils = {
 	createTodoListObject: function(reqBody, todoListObj) {
-		todoListObj.setTitle(reqBody.title);
-		todoListObj.setDescription(reqBody.description);
-		todoListObj.setEnabled(reqBody.isEnabled);
+		todoListObj.title = reqBody.title || '';
+		todoListObj.description = reqBody.description || '';
+		todoListObj.isEnabled = reqBody.isEnabled == true ? true : false;
 	}
 }
 
