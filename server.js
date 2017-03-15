@@ -39,6 +39,7 @@ let mockResponse = (req, res, next) => {
 }
 
 let todoListController = require('./app/controllers/todo.list.controller');
+let todoListItemController = require('./app/controllers/todo.list.item.controller');
 
 /************************************************
  * todo list endpoints
@@ -60,19 +61,19 @@ server.get('/todolists/:todoListId', todoListController.getSingleTodoList);
 server.del('/todolists/:todoListId', todoListController.removeExistingTodoList);
 
 // create todo list item
-server.post('/todolists/:todoListId/items', mockResponse);
+server.post('/todolists/:todoListId/items', todoListItemController.addItemToList);
 
 // update todo list item
-server.put('/todolists/:todoListId/items/:itemId', mockResponse);
+server.put('/todolists/:todoListId/items/:itemId', todoListItemController.updateItemInList);
 
 // list items under todo list
-server.get('/todolists/:todoListId/items', mockResponse);
+server.get('/todolists/:todoListId/items', todoListItemController.getAllItemsUnderList);
 
 // get single item from todo list
-server.get('/todolists/:todoListId/items/:itemId', mockResponse);
+server.get('/todolists/:todoListId/items/:itemId', todoListItemController.getSingleItemUnderList);
 
 // remove todo list item
-server.del('/todolists/:todoListId/items/:itemId', mockResponse);
+server.del('/todolists/:todoListId/items/:itemId', todoListItemController.removeItemFromList);
 
 module.exports = server;
 

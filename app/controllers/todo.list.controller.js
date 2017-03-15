@@ -209,7 +209,12 @@ let todoListController = {
 		.find({
 			'avail': true
 		})
-		.select(Constants.UNWANTED_FIELDS_RETRIEVE_RESOURCES)
+		.select({
+			'version': 0,
+			'avail': 0,
+			'__v': 0,
+			'items': 0
+		})
 		.exec()
 		.then((dbTodoLists) => {
 			result.success = true;
